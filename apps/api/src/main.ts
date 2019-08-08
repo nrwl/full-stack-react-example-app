@@ -4,13 +4,9 @@
  **/
 
 import * as express from 'express';
+import { Ticket } from '@happyorg/data';
 
 const app = express();
-
-type Ticket = {
-  title: string;
-  id: number;
-};
 
 const tickets: Ticket[] = [
   {

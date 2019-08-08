@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import { Ticket } from '@happyorg/data';
 import styled from 'styled-components';
 
 const StyledApp = styled.div`
@@ -39,11 +39,6 @@ const StyledApp = styled.div`
     border-radius: 4px;
   }
 `;
-
-type Ticket = {
-  title: string;
-  id: number;
-};
 
 export const App = () => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
