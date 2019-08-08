@@ -1,4 +1,8 @@
 {
+  "/agent": {
+    "target": "http://localhost:3334",
+    "secure": false
+  },
   "/api": {
     "target": "http://localhost:3333",
     "secure": false

@@ -241,7 +241,8 @@
           "builder": "@nrwl/web:dev-server",
           "options": {
             "buildTarget": "agent:build",
-            "proxyConfig": "apps/agent/proxy.conf.json"
+            "proxyConfig": "apps/agent/proxy.conf.json",
+            "port": 4201
           },
           "configurations": {
             "production": {
@@ -322,6 +323,62 @@
           "options": {
             "jestConfig": "libs/ticket-list/jest.config.js",
             "tsConfig": "libs/ticket-list/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "agent-api": {
+      "root": "apps/agent-api",
+      "sourceRoot": "apps/agent-api/src",
+      "projectType": "application",
+      "prefix": "agent-api",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "options": {
+            "outputPath": "dist/apps/agent-api",
+            "main": "apps/agent-api/src/main.ts",
+            "tsConfig": "apps/agent-api/tsconfig.app.json",
+            "assets": ["apps/agent-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/agent-api/src/environments/environment.ts",
+                  "with": "apps/agent-api/src/environments/environment.prod.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "agent-api:build",
+            "inspect": false
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "tslint",
+            "tsConfig": [
+              "apps/agent-api/tsconfig.app.json",
+              "apps/agent-api/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/agent-api/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/agent-api/jest.config.js",
+            "tsConfig": "apps/agent-api/tsconfig.spec.json"
           }
         }
       }

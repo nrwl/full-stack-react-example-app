@@ -43,11 +43,18 @@ const StyledApp = styled.div`
 
 export const App = () => {
   const [tickets, setTickets] = useState<Ticket[]>([]);
+  const [agentName, setAgentName] = useState<{ name: string }>({ name: '' });
 
   useEffect(() => {
     fetch('/api/tickets')
       .then(t => t.json())
       .then(setTickets);
+  }, []);
+
+  useEffect(() => {
+    fetch('/agent')
+      .then(t => t.json())
+      .then(setAgentName);
   }, []);
 
   return (
@@ -59,6 +66,7 @@ export const App = () => {
         <TicketList tickets={tickets} />
 
         <section>
+          <p>Agent {agentName.name}</p>
           <button>Agent Action</button>
         </section>
       </main>

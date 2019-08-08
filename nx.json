@@ -9,6 +9,7 @@
   },
   "projects": {
     "tickets": {
+      "implicitDependencies": ["api"],
       "tags": []
     },
     "tickets-e2e": {
@@ -21,12 +22,16 @@
       "tags": []
     },
     "agent": {
+      "implicitDependencies": ["api", "agent-api"],
       "tags": []
     },
     "agent-e2e": {
       "tags": []
     },
     "ticket-list": {
+      "tags": []
+    },
+    "agent-api": {
       "tags": []
     }
   }
