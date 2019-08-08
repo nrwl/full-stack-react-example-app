@@ -191,6 +191,140 @@
           }
         }
       }
+    },
+    "agent": {
+      "root": "apps/agent",
+      "sourceRoot": "apps/agent/src",
+      "projectType": "application",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@nrwl/web:build",
+          "options": {
+            "differentialLoading": false,
+            "outputPath": "dist/apps/agent",
+            "index": "apps/agent/src/index.html",
+            "main": "apps/agent/src/main.tsx",
+            "polyfills": "apps/agent/src/polyfills.ts",
+            "tsConfig": "apps/agent/tsconfig.app.json",
+            "assets": ["apps/agent/src/favicon.ico", "apps/agent/src/assets"],
+            "styles": [],
+            "scripts": [],
+            "webpackConfig": "@nrwl/react/plugins/babel"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "apps/agent/src/environments/environment.ts",
+                  "with": "apps/agent/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/web:dev-server",
+          "options": {
+            "buildTarget": "agent:build",
+            "proxyConfig": "apps/agent/proxy.conf.json"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "agent:build:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/agent/.eslintrc",
+            "tsConfig": [
+              "apps/agent/tsconfig.app.json",
+              "apps/agent/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!apps/agent/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "apps/agent/jest.config.js",
+            "tsConfig": "apps/agent/tsconfig.spec.json"
+          }
+        }
+      }
+    },
+    "agent-e2e": {
+      "root": "apps/agent-e2e",
+      "sourceRoot": "apps/agent-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/agent-e2e/cypress.json",
+            "tsConfig": "apps/agent-e2e/tsconfig.e2e.json",
+            "devServerTarget": "agent:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "agent:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "apps/agent-e2e/.eslintrc",
+            "tsConfig": ["apps/agent-e2e/tsconfig.e2e.json"],
+            "exclude": ["**/node_modules/**", "!apps/agent-e2e/**"]
+          }
+        }
+      }
+    },
+    "ticket-list": {
+      "root": "libs/ticket-list",
+      "sourceRoot": "libs/ticket-list/src",
+      "projectType": "library",
+      "schematics": {},
+      "architect": {
+        "lint": {
+          "builder": "@nrwl/linter:lint",
+          "options": {
+            "linter": "eslint",
+            "config": "libs/ticket-list/.eslintrc",
+            "tsConfig": [
+              "libs/ticket-list/tsconfig.lib.json",
+              "libs/ticket-list/tsconfig.spec.json"
+            ],
+            "exclude": ["**/node_modules/**", "!libs/ticket-list/**"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/ticket-list/jest.config.js",
+            "tsConfig": "libs/ticket-list/tsconfig.spec.json"
+          }
+        }
+      }
     }
   },
   "cli": {

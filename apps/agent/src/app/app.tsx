@@ -53,10 +53,14 @@ export const App = () => {
   return (
     <StyledApp>
       <header className="flex">
-        <h1>Welcome to tickets!</h1>
+        <h1>Welcome to agent!</h1>
       </header>
       <main>
         <TicketList tickets={tickets} />
+
+        <section>
+          <button>Agent Action</button>
+        </section>
       </main>
     </StyledApp>
   );

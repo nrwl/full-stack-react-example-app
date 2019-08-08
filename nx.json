@@ -19,6 +19,15 @@
     },
     "data": {
       "tags": []
+    },
+    "agent": {
+      "tags": []
+    },
+    "agent-e2e": {
+      "tags": []
+    },
+    "ticket-list": {
+      "tags": []
     }
   }
 }

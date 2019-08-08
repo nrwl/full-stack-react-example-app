@@ -16,7 +16,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@happyorg/data": ["libs/data/src/index.ts"]
+      "@happyorg/data": ["libs/data/src/index.ts"],
+      "@happyorg/ticket-list": ["libs/ticket-list/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
