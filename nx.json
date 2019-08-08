@@ -13,6 +13,9 @@
     },
     "tickets-e2e": {
       "tags": []
+    },
+    "api": {
+      "tags": []
     }
   }
 }

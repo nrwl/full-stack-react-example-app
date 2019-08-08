@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styled from 'styled-components';
 
@@ -46,16 +46,13 @@ type Ticket = {
 };
 
 export const App = () => {
-  const tickets: Ticket[] = [
-    {
-      title: `Install updates`,
-      id: 1
-    },
-    {
-      title: `Restore the backup`,
-      id: 2
-    }
-  ];
+  const [tickets, setTickets] = useState<Ticket[]>([]);
+
+  useEffect(() => {
+    fetch('/api/tickets')
+      .then(t => t.json())
+      .then(setTickets);
+  }, []);
 
   return (
     <StyledApp>
